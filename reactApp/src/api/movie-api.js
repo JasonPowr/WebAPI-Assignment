@@ -4,7 +4,7 @@ export const login = (username, password) => {
       'Content-Type': 'application/json'
     },
     method: 'post',
-    body: JSON.stringify({ username: username, password: password })
+    body: JSON.stringify({ username: username, password: password })  //api
   }).then(res => res.json())
 };
 
@@ -14,7 +14,7 @@ export const signup = (username, password) => {
       'Content-Type': 'application/json'
     },
     method: 'post',
-    body: JSON.stringify({ username: username, password: password })
+    body: JSON.stringify({ username: username, password: password }) //api
   }).then(res => res.json())
 };
 
@@ -22,7 +22,7 @@ export const getMovies = () => {
   return fetch(
     '/api/movies', {
       headers: {
-        'Authorization': window.localStorage.getItem('token')
+        'Authorization': window.localStorage.getItem('token') //api
       }
   }
   ).then(res => res.json());
@@ -34,7 +34,7 @@ export const getMovie = (args) => {
   const [, idPart] = args.queryKey;
   const { id } = idPart;
   return fetch(
-    //`https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_TMDB_KEY}`
+    //`https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_TMDB_KEY}`  //api
     `/api/movies/tmdb/${id}`, {
       headers: {
         'Authorization': window.localStorage.getItem('token')
@@ -53,7 +53,7 @@ export const getMovie = (args) => {
 
 export const getMovieReviews = (id) => {
   return fetch(
-    //`https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${process.env.REACT_APP_TMDB_KEY}`
+    //`https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${process.env.REACT_APP_TMDB_KEY}`  
     `/api/movies/tmdb/${id}/reviews`, {
       headers: {
         'Authorization': window.localStorage.getItem('token')
@@ -82,23 +82,6 @@ export const getUpcomingMovies = () => {
   }
   )
     .then(res => res.json())
-    .then(json => json.results);
-};
-
-export const addFavouriteMovie = (userName, id) => {
-  return fetch(`/api/users/${userName}/favourites`, {
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    method: 'post',
-    body: JSON.stringify({ userName: userName, id: id })
-  }).then(res => res.json())
-};
-
-export const getfavouriteMovies = (username) => {
-  return fetch(
-    `/api/users/${username}/favourites`
-  ).then(res => res.json())
     .then(json => json.results);
 };
 
