@@ -7,6 +7,7 @@ const router = express.Router();
 router.get('/', asyncHandler(async (req, res) => {
     const genres = await genreModel.find();
     res.status(200).json(genres);
+    console.log(genres);
 }));
 
 export default router;

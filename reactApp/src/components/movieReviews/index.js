@@ -20,6 +20,7 @@ const useStyles = makeStyles({
 export default function MovieReviews({ movie }) {
   const classes = useStyles();
   const [reviews, setReviews] = useState([]);
+  console.log(reviews)
 
   useEffect(() => {
     getMovieReviews(movie.id).then((reviews) => {
@@ -27,6 +28,7 @@ export default function MovieReviews({ movie }) {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
 
   return (
     <TableContainer component={Paper}>

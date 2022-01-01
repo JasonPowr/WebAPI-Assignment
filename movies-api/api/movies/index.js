@@ -5,6 +5,7 @@ import movieModel from './movieModel';
 import asyncHandler from 'express-async-handler';
 import {getUpcomingMovies} from '../tmdb-api';
 import { getMovie } from '../tmdb-api';
+import { getMovieReviews } from '../tmdb-api';
 
 const router = express.Router(); 
 
@@ -18,6 +19,13 @@ router.get('/tmdb/upcoming', asyncHandler( async(req, res) => {
     const movieDetails = await getMovie(id);
     res.status(200).json(movieDetails);
   }));
+
+  router.get('/tmdb/:id/reviews', asyncHandler( async(req, res) => {
+    const id = parseInt(req.params.id);
+    const movieReviews = await getMovieReviews(id);
+    res.status(200).json(movieReviews);
+    //console.log(movieReviews);
+}));
 
 router.get('/', asyncHandler(async (req, res) => {
     let { page = 1, limit = 10 } = req.query; // destructure page and limit and set default values
