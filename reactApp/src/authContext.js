@@ -8,7 +8,7 @@ const AuthContextProvider = (props) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [authToken, setAuthToken] = useState(existingToken);
   const [userName, setUserName] = useState("");
-  const [favourites, setFavourites] = useState([])
+  const [favourites, setFavourites] = useState( [] )
 
   //Function to put JWT token in local storage.
   const setToken = (data) => {
@@ -23,6 +23,7 @@ const AuthContextProvider = (props) => {
       setIsAuthenticated(true);
       setUserName(username);
       setFavourites(await getfavouriteMovies(username))
+      console.log(favourites)
     }
   };
 

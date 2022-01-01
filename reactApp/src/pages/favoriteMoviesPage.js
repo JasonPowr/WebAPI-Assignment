@@ -3,12 +3,15 @@ import PageTemplate from "../components/templateMovieListPage";
 import { MoviesContext } from "../contexts/moviesContext";
 import { useQueries } from "react-query";
 import { getMovie } from "../api/movie-api";
+import { AuthContext } from "../authContext";
 import Spinner from '../components/spinner';
 import RemoveFromFavorites from "../components/cardIcons/removeFromFavorites";
 import WriteReview from "../components/cardIcons/writeReview";
 
 const FavoriteMoviesPage = () => {
   const {favorites: movieIds } = useContext(MoviesContext);
+  const {favorites } = useContext(AuthContext);
+  console.log(favorites)
 
   // Create an array of queries and run in parallel.
   const favoriteMovieQueries = useQueries(

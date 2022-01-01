@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PageTemplate from '../components/templateMovieListPage'
-import {getUpcomingMovies} from '../api/movie-api'
+import { getUpcomingMovies } from '../api/movie-api'
 import AddToFavoritesIcon from '../components/cardIcons/addToFavorites'
 import AddToWatchList from '../components/cardIcons/addToWatchList'
 

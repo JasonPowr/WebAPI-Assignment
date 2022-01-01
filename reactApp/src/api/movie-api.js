@@ -27,49 +27,43 @@ export const getMovies = () => {
     ).then(res => res.json());
   };
 
-export const addFavouriteMovie = (userName, id) => {
-  return fetch(`/api/users/${userName}/favourites`, {
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    method: 'post',
-    body: JSON.stringify({ userName: userName, id: id })
-  }).then(res => res.json())
-};
+  export const getUpcomingMovies = () => {
+    return fetch(
+      //`https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`
+      '/api/movies/tmdb/upcoming',{headers: {
+        'Authorization': window.localStorage.getItem('token')
+     }
+   }
+    )
+      .then(res => res.json())
+      .then(json => json.results);
+  };
 
-export const getfavouriteMovies = (username) => {
-  return fetch(
-    `/api/users/${username}/favourites`
-  ).then((response) => {
-    if (!response.ok) {
-      throw new Error(response.json().message);
-    }
+  export const addFavouriteMovie = (userName,id) => {
+    return fetch (`/api/users/${userName}/favourites`, {
+      headers: {
+        'Content-Type':'application/json'
+      },
+      method:'post',
+      body: JSON.stringify({userName: userName, id: id})
+    }).then(res => res.json())
+  };
+
+  export const getfavouriteMovies = (username) => {
+    return fetch(
+      `/api/users/${username}/favourites`
+    ).then((response) => {
+      if (!response.ok){
+        throw new Error(response.json().message);
+      }
       return response.json();
     })
     .catch((error) => {
       throw error
     });
-};
+  };
 
 
-
-  export const getUpcomingMovies = () => {
-    return fetch(
-       // `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.TMDB_KEY}&language=en-US&page=1`
-       `/api/movies`
-    ).then((response) => {
-        if (!response.ok) {
-            throw new Error(response.json().message);
-        }
-        return response.json();
-    })
-        .catch((error) => {
-            throw error
-        });
-};
-
-
-    
   export const getMovie = (args) => {
     // console.log(args)
     const [, idPart] = args.queryKey;
