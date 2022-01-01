@@ -4,13 +4,19 @@ import uniqid from 'uniqid';
 import movieModel from './movieModel';
 import asyncHandler from 'express-async-handler';
 import {getUpcomingMovies} from '../tmdb-api';
+import { getMovie } from '../tmdb-api';
 
 const router = express.Router(); 
 
 router.get('/tmdb/upcoming', asyncHandler( async(req, res) => {
     const upcomingMovies = await getUpcomingMovies();
     res.status(200).json(upcomingMovies);
-    console.log("Hello");
+  }));
+
+  router.get('/tmdb/:id', asyncHandler( async(req, res) => {
+    const id = parseInt(req.params.id);
+    const movieDetails = await getMovie(id);
+    res.status(200).json(movieDetails);
   }));
 
 router.get('/', asyncHandler(async (req, res) => {
