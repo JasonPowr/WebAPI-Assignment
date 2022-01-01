@@ -41,7 +41,7 @@ const App = () => {
             <Route path="/signup" component={SignUpPage} />
             <PrivateRoute exact path="/reviews/form" component={AddMovieReviewPage} />
             <PrivateRoute path="/reviews/:id" component={MovieReviewPage} />
-            <PrivateRoute exact path="/movies/upcoming" component={UpcomingMoviesPage} />
+            <PrivateRoute path="/movies/upcoming" component={UpcomingMoviesPage} />
             <PrivateRoute exact path="/movies/favorites" component={FavoriteMoviesPage} />
             <PrivateRoute path="/movies/:id" component={MoviePage} />
             <PrivateRoute exact path="/" component={HomePage} />

@@ -10,6 +10,7 @@ const router = express.Router();
 router.get('/tmdb/upcoming', asyncHandler( async(req, res) => {
     const upcomingMovies = await getUpcomingMovies();
     res.status(200).json(upcomingMovies);
+    console.log("Hello");
   }));
 
 router.get('/', asyncHandler(async (req, res) => {
