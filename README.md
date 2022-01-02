@@ -1,67 +1,54 @@
 # Assignment 2 - Web API.
-​
-Name: Your Name
+Name: Jason Power
 ​
 ## Features.
-​
-...... A bullet-point list of the ADDITIONAL features you have implemented in the API **THAT WERE NOT IN THE LABS** ......,
- 
- + Feature 1 - .... a statement of its purpose/objective ..... 
- + Feature 2 - .......
- + Feature 3 = ......
- + etc
- + etc
+ + Login/Sign up
+ + Protected Routes
+ + HomePage using seeded data from custom API
+ + Movie Deatils using custom Api with data from tmdb
+ + Movie Reviews using custom Api with data from tmdb
+ + Upcoming Movies using custom Api with data from tmdb
+ + Now Playing Movies using custom Api with data from tmdb
+ + Top Rated Movies using custom Api with data from tmdb
 ​
 ## Installation Requirements
-​
-Describe what needs to be on the machine to run the API (Node v?, NPM, MongoDB instance, any other 3rd party software not in the package.json). 
-​
-Describe getting/installing the software, perhaps:
-​
-```bat
-git clone http:\myrepo.git
-```
-​
-followed by installation
-​
-```bat
-git install
-```
-​
++ Clone the repo from https://github.com/JasonPowr/WebAPI-Assignment.git .
++ Install Nodeman using this command "npm install --save-dev nodemon" in the movies API folder.
++ Use the command "npm install" in the react app folder.
++ Run the command "npm start in movies-api"
++ Run the command "npm start in reactApp"
+
 ## API Configuration
-Describe any configuration that needs to take place before running the API. For example, creating an ``.env`` and what variables to put in it. Give an example of how this might be structured/done.
-REMEMBER: DON'T PUT YOUR OWN USERNAMES/PASSWORDS/AUTH KEYS IN THE README OR ON GITHUB, just placeholders as indicated below:
-​
-```bat
-NODE_ENV=development
-PORT=8080
-HOST=
-mongoDB=YourMongoURL
-seedDb=true
-secret=YourJWTSecret
-```
-​
-​
++ Create a .env file in react app with the following contents.
+  REACT_APP_TMDB_KEY= Your_TMDB_KEY
+
++ Create a .env file in movies-api with the following contents.
+
+  NODE_ENV=development
+  PORT=8080
+  HOST=localhost
+  MONGO_DB=mongodb://localhost:27017/movies_db
+  SEED_DB=True  
+  SECRET=ilikecake
+  TMDB_KEY= Your_TMDB_KEY
+
 ## API Design
-Give an overview of your web API design, perhaps similar to the following: 
-​
-|  |  GET | POST | PUT | DELETE
-| -- | -- | -- | -- | -- 
-| /api/movies |Gets a list of movies | N/A | N/A |
-| /api/movies/{movieid} | Get a Movie | N/A | N/A | N/A
-| /api/movies/{movieid}/reviews | Get all reviews for movie | Create a new review for Movie | N/A | N/A  
-| ... | ... | ... | ... | ...
-​
-If you have your API design on an online platform or graphic, please link to it (e.g. [Swaggerhub](https://app.swaggerhub.com/)).
-​
-​
++ /api/movies/tmdb/nowplaying
++ /api/movies/tmdb/toprated
++ /api/users
++ /api/users?action=register
++ /api/movies
++ /api/movies/tmdb/${id}
++ /api/movies/tmdb/${id}/reviews
++ /api/movies/tmdb/upcoming
+
 ## Security and Authentication
-Give details of authentication/ security implemented on the API(e.g. passport/sessions). Indicate which routes are protected.
+Simple but functional login and sign up page. Every page except for  login and sign up page are protected unitl Login.
 ​
 ## Integrating with React App
-​
-Describe how you integrated your React app with the API. Perhaps link to the React App repo and give an example of an API call from React App. For example: 
-​
+To begin with I cloned the react App and copied the movies API into the app. I then changed the fetches to suit my custom API in two ways:
+
+1.Seeded Data fetch
 ~~~Javascript
 export const getMovies = () => {
   return fetch(
@@ -75,11 +62,32 @@ export const getMovies = () => {
 };
 ​
 ~~~
-​
+
+2.Data from my custom API and through tmdb.
+~~~Javascript
+export const getNowPlaying = () => {
+  return fetch(
+    //`https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`
+    '/api/movies/tmdb/nowplaying', {
+      headers: {
+        'Authorization': window.localStorage.getItem('token') //api
+      } 
+  }
+  )
+    .then(res => res.json())
+    .then(json => json.results);
+~~~
+
+Endpont for Above.
+~~~Javascript
+    router.get('/tmdb/upcoming', asyncHandler( async(req, res) => {
+    const upcomingMovies = await getUpcomingMovies();
+    res.status(200).json(upcomingMovies);
+  }));
+
+~~~
 ## Extra features
-​
-. . Briefly explain any non-standard features, functional or non-functional, developed for the app.  
-​
+No Extra features.
+
 ## Independent learning
-​
-. . State the non-standard aspects of React/Express/Node (or other related technologies) that you researched and applied in this assignment . .  
+No Independent learning.
