@@ -1,3 +1,29 @@
+export const getNowPlaying = () => {
+  return fetch(
+    //`https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`
+    '/api/movies/tmdb/nowplaying', {
+      headers: {
+        'Authorization': window.localStorage.getItem('token')
+      } 
+  }
+  )
+    .then(res => res.json())
+    .then(json => json.results);
+};
+
+export const getTopRated = () => {
+  return fetch(
+    //`https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`
+    '/api/movies/tmdb/toprated', {
+      headers: {
+        'Authorization': window.localStorage.getItem('token')
+      } 
+  }
+  )
+    .then(res => res.json())
+    .then(json => json.results)
+};
+
 export const login = (username, password) => {
   return fetch('/api/users', {
     headers: {
@@ -56,7 +82,7 @@ export const getMovieReviews = (id) => {
     //`https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${process.env.REACT_APP_TMDB_KEY}`  
     `/api/movies/tmdb/${id}/reviews`, {
       headers: {
-        'Authorization': window.localStorage.getItem('token')
+        'Authorization': window.localStorage.getItem('token') //api
       }
   }
   ).then((response) => {
@@ -77,13 +103,15 @@ export const getUpcomingMovies = () => {
     //`https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`
     '/api/movies/tmdb/upcoming', {
       headers: {
-        'Authorization': window.localStorage.getItem('token')
-      }
+        'Authorization': window.localStorage.getItem('token')  //api
+      } 
   }
   )
     .then(res => res.json())
     .then(json => json.results);
 };
+
+
 
 export const getGenres = async () => {
   return fetch(

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PageTemplate from '../components/templateMovieListPage'
-import { getNowPlaying } from "../api/tmdb-api";
+import { getNowPlaying } from '../api/movie-api';
 import AddToWatchList from '../components/cardIcons/addToWatchList';
 
 const NowPlayingMoviePage = (props) => {
@@ -18,6 +18,7 @@ const NowPlayingMoviePage = (props) => {
     useEffect(() => {
       getNowPlaying().then(movies => {
         setMovies(movies);
+        console.log(movies)
       });
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);

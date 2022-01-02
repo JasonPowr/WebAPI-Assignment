@@ -5,6 +5,7 @@ import AddToFavoritesIcon from '../components/cardIcons/addToFavorites'
 import AddToWatchList from '../components/cardIcons/addToWatchList'
 
 const UpcomingMoviesPage = (props) => {
+  console.log("UpcomingMoviesPage")
     const [movies, setMovies] = useState([]);
     const favorites = movies.filter(m => m.favorite)
     localStorage.setItem('favorites', JSON.stringify(favorites))
