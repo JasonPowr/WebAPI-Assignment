@@ -3,7 +3,7 @@ export const getNowPlaying = () => {
     //`https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`
     '/api/movies/tmdb/nowplaying', {
       headers: {
-        'Authorization': window.localStorage.getItem('token')
+        'Authorization': window.localStorage.getItem('token') //api
       } 
   }
   )
@@ -16,7 +16,7 @@ export const getTopRated = () => {
     //`https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`
     '/api/movies/tmdb/toprated', {
       headers: {
-        'Authorization': window.localStorage.getItem('token')
+        'Authorization': window.localStorage.getItem('token') //api
       } 
   }
   )
